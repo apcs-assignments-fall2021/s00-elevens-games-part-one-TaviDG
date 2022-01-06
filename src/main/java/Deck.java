@@ -18,40 +18,72 @@ public class Deck {
 	public Deck(String[] ranks, String[] suits, int[] values) {
 		// YOUR CODE HERE
 		// // Remember, in a constructor you need to first create the ArrayList for the instance variable!
+
+		cardsList = new ArrayList<Card>();
+
+		for (String suit: suits){
+				for (int i = 0; i < ranks.length; i++) {
+				cardsList.add(new Card(ranks[i], suit, values[i]));
+			}
+		}
+		size = cardsList.size();
 	}
 	// Deals a card from this deck.
 	// return the card just dealt, or null if all the cards have been dealt already
 	// Recall that the cards are dealt from top (highest-index) down
 	// Updates the size as well
 	public Card deal() {
-		// YOUR CODE HERE
+		if (!isEmpty()){
+			Card topCard = cardsList.get(size-1);
+			size--;
+			return topCard;
+		}
         return null;
 	}
 
 	// Determines if this deck is empty (there are no undealt cards).
 	// returns true if this deck is empty, false otherwise.
 	public boolean isEmpty() {
-		// YOUR CODE HERE
+		if (size==0){
+			return true;
+		}
 		return false;
 	}
 
 	// Returns the size (number of undealt cards) in this deck.
 	public int getSize() {
 		// YOUR CODE HERE
-		return -1;
+		return size;
 	}
 
 	// Shuffles the deck by repeatedly randomly swapping pairs of cards
 	// This method should change the order of the cards in cardsList
 	// Shuffling should also reset the size variable to its original value
 	public void shuffle() {
-		// YOUR CODE HERE
+		size = cardsList.size();
+		for (int i = 0; i<size ; i++) {
+			int swapIndex = (int) (Math.random()*size);
+			Card temp = cardsList.get(swapIndex);
+			cardsList.set(swapIndex,cardsList.get(i));
+			cardsList.set(i,temp);
+		}
 	}
 
 	// OPTIONAL: Write code that carries out a "perfect" shuffle
 	// that perfectly interweaves the two halves of the deck
 	public void perfectShuffle() {
-		// YOUR CODE HERE
+		size = cardsList.size();
+		int halfIndex = size/2;
+		int deck2Index = 1;
+		for (int i = halfIndex; i < size; i++) {
+			Card temp = cardsList.get(i);
+			cardsList.remove(i);
+			cardsList.add(deck2Index,temp);
+			deck2Index+=2;
+
+		}
+
+
 	}
 
 

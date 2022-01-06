@@ -13,7 +13,8 @@ public class CardClient {
 		// ace
 
 		// ** You might want to test the other getters here as well **
-
+		System.out.println(c1.getPointValue());
+		System.out.println(c1.getSuit());
 		// Print out the card (toString method)
 		System.out.println(c1);
 		// ace of hearts (point value = 1)
